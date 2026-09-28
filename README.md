@@ -28,9 +28,9 @@ Jalankan satu worker Gunicorn karena Socket.IO dan sesi operator menggunakan mem
 
 ### Deploy ke Render
 
-File `render.yaml` menyiapkan web service, environment variables, dan persistent disk untuk database chat. Di dashboard Render pilih **New > Blueprint**, hubungkan repository ini, lalu isi `CHAT_OPERATOR_USERNAME` dan `CHAT_OPERATOR_PASSWORD` ketika diminta. Setelah deploy selesai, buka URL Render yang diberikan dan tambahkan `/operator/login` untuk masuk sebagai operator.
+File `render.yaml` menyiapkan web service Render Free dan environment variables. Di dashboard Render pilih **New > Blueprint**, hubungkan repository ini, lalu isi `CHAT_OPERATOR_USERNAME` dan `CHAT_OPERATOR_PASSWORD` ketika diminta. Setelah deploy selesai, buka URL Render yang diberikan dan tambahkan `/operator/login` untuk masuk sebagai operator.
 
-Persistent disk diperlukan agar riwayat chat tidak hilang saat service restart. Konfigurasi ini menggunakan plan `starter` karena persistent disk dan live chat membutuhkan service yang tetap berjalan.
+Konfigurasi Free tidak menggunakan persistent disk, sehingga riwayat chat SQLite dapat hilang ketika service melakukan restart, redeploy, atau filesystem dibersihkan. Service Free juga dapat sleep setelah tidak ada aktivitas; pengguna mungkin perlu menunggu beberapa detik saat akses pertama. Live chat tetap berfungsi selama service aktif. Jika nanti membutuhkan riwayat chat permanen, upgrade ke plan berbayar dan tambahkan persistent disk.
 
 Tes:
 

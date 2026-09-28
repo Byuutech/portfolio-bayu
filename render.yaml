@@ -2,7 +2,7 @@ services:
   - type: web
     name: portfolio-bayu
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn --worker-class gthread --threads 100 --workers 1 --bind 0.0.0.0:$PORT app:app
     envVars:
@@ -14,9 +14,3 @@ services:
         sync: false
       - key: SESSION_COOKIE_SECURE
         value: "1"
-      - key: CHAT_DATABASE
-        value: /opt/render/project/src/instance/chat.sqlite3
-    disk:
-      name: portfolio-bayu-chat-data
-      mountPath: /opt/render/project/src/instance
-      sizeGB: 1
