@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Live Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="operator-page">
+    <main class="operator-dashboard">
+        <header class="operator-topbar">
+            <a class="logo" href="{{ url_for('home') }}">B<span>.</span></a>
+            <h1>Live chat</h1>
+            <form action="{{ url_for('chat.operator_logout') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ session['operator_csrf_token'] }}">
+                <button class="operator-logout" type="submit">Keluar</button>
+            </form>
+        </header>
+        <div class="operator-chat-layout">
+            <aside class="operator-conversation-list" aria-label="Daftar percakapan">
+                <h2>Percakapan</h2>
+                <div id="operator-conversations"></div>
+            </aside>
+            <section class="operator-chat" aria-label="Percakapan terpilih">
+                <p id="operator-empty" class="operator-empty">Pilih percakapan untuk mulai membalas.</p>
+                <div class="operator-messages" id="operator-messages" aria-live="polite" aria-relevant="additions"></div>
+                <p class="live-chat-error" id="operator-chat-error" role="alert"></p>
+                <form class="live-chat-form operator-chat-form" id="operator-chat-form">
+                    <label class="visually-hidden" for="operator-chat-input">Tulis balasan</label>
+                    <input id="operator-chat-input" type="text" maxlength="1000" placeholder="Tulis balasan..." autocomplete="off" required disabled>
+                    <button type="submit" disabled>Kirim</button>
+                </form>
+            </section>
+        </div>
+    </main>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/operator_chat.js') }}" defer></script>
+</body>
+</html>

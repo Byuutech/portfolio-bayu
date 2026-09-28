@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Operator | Live Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="operator-page">
+    <main class="operator-login-card">
+        <a class="logo" href="{{ url_for('home') }}">B<span>.</span></a>
+        <p class="section-label">OPERATOR</p>
+        <h1>Masuk ke live chat</h1>
+        {% if error %}
+            <p class="operator-error" role="alert">{{ error }}</p>
+        {% endif %}
+        {% if not credentials_configured %}
+            <p class="operator-hint">Atur CHAT_OPERATOR_USERNAME dan CHAT_OPERATOR_PASSWORD pada konfigurasi server.</p>
+        {% endif %}
+        <form method="post" class="operator-login-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" required>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required>
+            <button type="submit">Masuk</button>
+        </form>
+    </main>
+</body>
+</html>

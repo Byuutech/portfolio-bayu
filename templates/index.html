@@ -405,6 +405,43 @@
 
     </main>
 
+    <section class="live-chat" aria-label="Live chat">
+        <button
+            class="live-chat-toggle"
+            id="live-chat-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="live-chat-panel"
+        >
+            <span aria-hidden="true">✦</span>
+            Chat with me
+        </button>
+
+        <div class="live-chat-panel" id="live-chat-panel" aria-hidden="true">
+            <header class="live-chat-header">
+                <div>
+                    <h2>Live chat</h2>
+                    <p><span class="status-dot"></span> Kirim pesan kapan saja</p>
+                </div>
+                <button class="live-chat-close" id="live-chat-close" type="button" aria-label="Tutup chat">×</button>
+            </header>
+            <div class="live-chat-messages" id="live-chat-messages" aria-live="polite" aria-relevant="additions"></div>
+            <p class="live-chat-error" id="live-chat-error" role="alert"></p>
+            <form class="live-chat-form" id="live-chat-form">
+                <label class="visually-hidden" for="live-chat-input">Tulis pesan</label>
+                <input
+                    id="live-chat-input"
+                    name="message"
+                    type="text"
+                    maxlength="1000"
+                    placeholder="Tulis pesan..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" aria-label="Kirim pesan">Kirim</button>
+            </form>
+        </div>
+    </section>
 
     <footer>
         <p>
@@ -417,7 +454,9 @@
     </footer>
 
 
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" defer></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/live_chat.js') }}" defer></script>
 
 </body>
 </html>
