@@ -26,6 +26,12 @@ gunicorn --worker-class gthread --threads 100 --workers 1 app:app
 
 Jalankan satu worker Gunicorn karena Socket.IO dan sesi operator menggunakan memori proses. Simpan SQLite pada disk persisten, bukan filesystem sementara. Halaman operator memakai sesi Flask bertanda tangan; pastikan `FLASK_SECRET_KEY` disimpan sebagai secret di environment deployment. Browser memuat Socket.IO client versi tetap dari CDN.
 
+### Deploy ke Render
+
+File `render.yaml` menyiapkan web service, environment variables, dan persistent disk untuk database chat. Di dashboard Render pilih **New > Blueprint**, hubungkan repository ini, lalu isi `CHAT_OPERATOR_USERNAME` dan `CHAT_OPERATOR_PASSWORD` ketika diminta. Setelah deploy selesai, buka URL Render yang diberikan dan tambahkan `/operator/login` untuk masuk sebagai operator.
+
+Persistent disk diperlukan agar riwayat chat tidak hilang saat service restart. Konfigurasi ini menggunakan plan `starter` karena persistent disk dan live chat membutuhkan service yang tetap berjalan.
+
 Tes:
 
 ```powershell
